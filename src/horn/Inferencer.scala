@@ -3,10 +3,10 @@ package horn
 object Inferencer {
 
   def infer(kb: List[Clause], q: Symbol): Boolean = {
-    //a table, indexed by clause, initially the number of premises
-    //this keeps track of how many premises of each implication are as yet unknown. 
+    // a table, indexed by clause, initially the number of premises
+    // this keeps track of how many premises of each implication are as yet unknown. 
     // whenever a new symbol p from the agenda is processed, the count is reduced by one for
-    /// each implication in whose premise p appears.
+    // each implication in whose premise p appears.
     // if a count reaches zero, all the premises of the implication are known so its conclusion can be added to the agenda.
     var count = Map[Clause, Int]();
     kb.foreach(clause => { count += (clause -> clause.cond.size) })
@@ -24,7 +24,7 @@ object Inferencer {
 
     //go till the agenda has something 
     while (!agenda.isEmpty) {
-      val p = agenda.head; agenda = agenda.tail; // p = POP(agenda)
+      val p = agenda.head; agenda = agenda.tail; 
       //do the stuff only if p has not been inferred already
       if (!inferred.get(p).getOrElse(false)) {
         inferred += (p -> true)
